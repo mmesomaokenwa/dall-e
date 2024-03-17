@@ -8,10 +8,6 @@ import dalleRoutes from './routes/dalleRoutes.js'
 
 dotenv.config()
 
-const url = process.env.MONGODB_URL;
-const encondedPassword = encodeURIComponent(process.env.MONGODB_PASSWORD);
-const urlWithEncodedPassword = url.replace("<password>", encondedPassword);
-
 const app = express()
 app.use(cors())
 app.use(express.json({ limit: '50mb'})) // to support JSON-encoded bodies
@@ -26,7 +22,7 @@ app.get('/', (req, res) => {
 
 const startServer = async () => {
   try {
-    connectDB(urlWithEncodedPassword)
+    connectDB(process.env.MONGODB_URL);
     app.listen(process.env.PORT, () => console.log(`Server is running on port http://localhost:${process.env.PORT}`))
   } catch (error) {
     console.log(error)
