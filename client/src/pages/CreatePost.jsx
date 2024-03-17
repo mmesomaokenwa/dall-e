@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { DevTool } from '@hookform/devtools'
 import { useCreatePost, useGenerateImage } from '../hooks/mutations'
 import { preview } from '../assets'
 import { getRandomPrompt } from '../utils'
@@ -13,7 +12,7 @@ const CreatePost = () => {
 
   const { mutateAsync: generateImage, isLoading: generatingImg } = useGenerateImage()
 
-  const { register, handleSubmit, control, getValues, setValue, formState: { errors, isSubmitting } } = useForm({
+  const { register, handleSubmit, getValues, setValue, formState: { errors, isSubmitting } } = useForm({
     defaultValues: {
       name: '',
       prompt: '',
@@ -114,7 +113,6 @@ const CreatePost = () => {
             {isSubmitting ? 'Sharing...' : 'Share with the community'}
           </button>
         </div>
-        <DevTool control={control} />
       </form>
     </div>
   )
